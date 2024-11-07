@@ -14,7 +14,7 @@ function Projects() {
   const projects = [
     {
       id: 'project1',
-      title: 'Game Project 1: Off Brand Mario 2D',
+      title: 'Game Project 1: Off-Brand Mario 2D',
       description: 'A fun and cool shooter game!',
       details: 'The game is about someone in the military doing campaign missions to fight for his Country. You can fight against Russians, American criminals, and Battleships!',
       image: 'images/Off brand mario.png',
