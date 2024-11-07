@@ -3,7 +3,7 @@ name: Deploy React App
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -20,8 +20,8 @@ jobs:
         username: ${{ secrets.SERVER_USER }}   
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /root/www/my-website  # Path on remote server
+          cd /home/russell/www/Portfolio-website  # Path on remote server
           git pull origin master
           npm install
           npm run build
-          pm2 restart my-website-app
+          pm2 restart russells-website
