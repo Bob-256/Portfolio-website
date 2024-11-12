@@ -10,28 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
         chmod 600 ~/.ssh/deploy_key
         ssh-keyscan -t ed25519 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
 
-    - name: Debug SSH
+    - name: Deploy via SSH command
       run: |
-        ls -la ~/.ssh
-        ssh -v -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} echo "SSH connection test"
-
-    - name: Deploy
-      run: |
-        ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} '
-          cd /home/russell/www/Portfolio-website &&
-          git pull origin main &&
-          npm install &&
-          npm run build &&
+        ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'ENDSSH'
+          cd /home/russell/www/Portfolio-website
+          export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
+          git pull origin main
+          npm install
+          npm run build
           pm2 restart russells-website
-        '
+        ENDSSH
