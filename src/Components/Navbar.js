@@ -1,12 +1,14 @@
 import React from 'react';
 import logo from '../images/Main Logo small.png';
 
+
 function Navbar() {
+  const homepageUrl = process.env.REACT_APP_HOMEPAGE_URL || '/';
   return (
     <nav className="bg-gray-900">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo section */}
-        <a href="/">
+        <a href={homepageUrl}>
           <img src={logo} alt="Main Logo" className="h-40 w-auto" />
         </a>
 
