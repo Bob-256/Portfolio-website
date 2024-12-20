@@ -43,7 +43,7 @@ function Projects() {
       image: img2DPlatformer,
       video: 'https://www.youtube.com/embed/DmhgALevfEU',
       codeLink: 'https://github.com/yourusername/project1',
-      playLink: 'https://game1.example.com',
+      playLink: '../WebGlGames/2D-Platformer/index.html',
     },
   ];
 
@@ -64,6 +64,7 @@ function Projects() {
             {detailsVisible[project.id] && (
               <div className="mt-4">
                 <p>{project.details}</p>
+                <a href={project.playLink}>playGame</a>
                 <img src={project.image} alt={project.title} className="w-full mb-3" />
                 <iframe
                   width="100%"
