@@ -33,7 +33,7 @@ function Projects() {
       image: img3DPlatformer,
       video: 'https://www.youtube.com/embed/ckRsxmpFC2M',
       codeLink: 'https://github.com/yourusername/project1',
-      playLink: 'https://game1.example.com',
+      playLink: `${process.env.PUBLIC_URL}/WebGlGames/MegaBeanParkour/index.html`,
     },
     {
       id: 'project3',
